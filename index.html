@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="box">
+        <div class="search">
+            <input type="text" class="search-bar" placeholder="Search place"><br>
+            <button class="btn"><em class="fas fa-search"></em></button><br>
+        </div><br>
+        <div class="city-name">Weather in Paris</div><br>
+        <div class="temp"></div>
+        <div class="det">
+            <img src="https://openweathermap.org/img/wn/01n@2x.png" alt="" class="icon">
+            <div class="desc"></div><br>
+        </div>
+        <div class="details">
+            <div class="max-temp">Max temp:</div><br>
+            <div class="min-temp">Min temp:</div><br>
+            <div class="humidity">Humidity:</div><br>
+            <div class="wind">Wind speed:</div>
+        </div>
+    </div>
+    <script src="main.js" defer></script>
+</body>
+</html>
