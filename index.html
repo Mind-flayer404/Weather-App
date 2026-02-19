@@ -1,36 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
-    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <meta name="description" content="Beautiful weather app with real-time forecasts and dynamic backgrounds">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Weather App</title>
 </head>
+
 <body>
-    <div class="box">
+    <!-- Dynamic background layers for crossfade -->
+    <div class="bg-layer bg-current" id="bgCurrent"></div>
+    <div class="bg-layer bg-next" id="bgNext"></div>
+    <div class="bg-overlay"></div>
+
+    <div class="card" id="weatherCard">
+        <!-- Search -->
         <div class="search">
-            <input type="text" class="search-bar" placeholder="Search place"><br>
-            <button class="btn"><em class="fas fa-search"></em></button><br>
-        </div><br>
-        <div class="city-name">Weather in Paris</div><br>
-        <div class="temp"></div>
-        <div class="det">
-            <img src="https://openweathermap.org/img/wn/01n@2x.png" alt="" class="icon">
-            <div class="desc"></div><br>
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" class="search-bar" id="searchBar" placeholder="Search for a city..."
+                    autocomplete="off">
+            </div>
+            <button class="btn" id="searchBtn" aria-label="Search">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
         </div>
-        <div class="details">
-            <div class="max-temp">Max temp:</div><br>
-            <div class="min-temp">Min temp:</div><br>
-            <div class="humidity">Humidity:</div><br>
-            <div class="wind">Wind speed:</div>
+
+        <!-- Loading Spinner -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Fetching weather...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error" id="error">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <p id="errorMsg">City not found. Please try again.</p>
+        </div>
+
+        <!-- Weather Content -->
+        <div class="weather-content" id="weatherContent">
+            <!-- Main Info -->
+            <div class="main-info">
+                <h1 class="city-name" id="cityName">Paris</h1>
+                <p class="date-time" id="dateTime"></p>
+            </div>
+
+            <div class="temperature-section">
+                <img src="" alt="Weather icon" class="weather-icon" id="weatherIcon">
+                <div class="temp-info">
+                    <span class="temp" id="temp">--</span>
+                    <span class="temp-unit">°C</span>
+                </div>
+            </div>
+
+            <p class="description" id="desc">--</p>
+            <p class="feels-like" id="feelsLike">Feels like --°C</p>
+
+            <!-- Detail Grid -->
+            <div class="detail-grid">
+                <div class="detail-item">
+                    <i class="fa-solid fa-temperature-arrow-up"></i>
+                    <div class="detail-info">
+                        <span class="detail-value" id="maxTemp">--°C</span>
+                        <span class="detail-label">High</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-temperature-arrow-down"></i>
+                    <div class="detail-info">
+                        <span class="detail-value" id="minTemp">--°C</span>
+                        <span class="detail-label">Low</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-droplet"></i>
+                    <div class="detail-info">
+                        <span class="detail-value" id="humidity">--%</span>
+                        <span class="detail-label">Humidity</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-wind"></i>
+                    <div class="detail-info">
+                        <span class="detail-value" id="wind">-- km/h</span>
+                        <span class="detail-label">Wind</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    <div class="detail-info">
+                        <span class="detail-value" id="pressure">-- hPa</span>
+                        <span class="detail-label">Pressure</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-eye"></i>
+                    <div class="detail-info">
+                        <span class="detail-value" id="visibility">-- km</span>
+                        <span class="detail-label">Visibility</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-sun"></i>
+                    <div class="detail-info">
+                        <span class="detail-value" id="sunrise">--:--</span>
+                        <span class="detail-label">Sunrise</span>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <i class="fa-solid fa-moon"></i>
+                    <div class="detail-info">
+                        <span class="detail-value" id="sunset">--:--</span>
+                        <span class="detail-label">Sunset</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
     <script src="main.js" defer></script>
 </body>
+
 </html>
